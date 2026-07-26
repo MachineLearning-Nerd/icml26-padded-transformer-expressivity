@@ -202,8 +202,8 @@ def main() -> None:
         line for line in transcript.splitlines()
         if "depends on axioms" in line or "does not depend on any axioms" in line
     ]
-    if len(reports) != 4:
-        raise SystemExit(f"expected four axiom reports, got {len(reports)}")
+    if len(reports) != 5:
+        raise SystemExit(f"expected five axiom reports, got {len(reports)}")
 
     certificate = {
         "verdict": "lean_kernel_verified",

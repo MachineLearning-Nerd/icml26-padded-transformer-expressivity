@@ -28,6 +28,10 @@ THREAD_CAP_VARIABLES = (
 )
 COMMANDS = (
     ("claim4_universal_formal", (sys.executable, "repro/run_claim4_formal.py")),
+    (
+        "claim4_independent_checker",
+        (sys.executable, "repro/run_claim4_independent.py"),
+    ),
     ("finite_claim_regressions", (sys.executable, "repro/run_audit.py")),
     ("theorem42_graph_regression", (sys.executable, "repro/run_theorem42.py")),
     (

@@ -200,9 +200,31 @@ theorem rounded_attention_eq_hard
   rw [rounded_numerator_eq_hard indices bits hbits maximum score value hle hgridGap]
   rw [rounded_denominator_eq_hard indices bits hbits maximum score hle hgridGap]
 
+/-- Once every replacement layer is pointwise identical on the shared
+    fixed-point state, equality propagates through an arbitrary finite stack.
+    This isolates the layer-induction step from the numerical kernel above. -/
+def applyLayers {α : Type*} : List (α → α) → α → α
+  | [], state => state
+  | layer :: layers, state => applyLayers layers (layer state)
+
+theorem layerwise_eq_implies_stack_eq
+    {α : Type*} (hard soft : List (α → α))
+    (hlayers : List.Forall₂ (fun f g => ∀ state, f state = g state) hard soft) :
+    ∀ state, applyLayers hard state = applyLayers soft state := by
+  induction hlayers with
+  | nil =>
+      intro state
+      rfl
+  | cons heq _ ih =>
+      intro state
+      simp only [applyLayers]
+      rw [heq state]
+      exact ih _
+
 #print axioms exp_neg_succ_lt_half_grid
 #print axioms off_max_exponential_underflows
 #print axioms roundedKernel_eq_hardKernel
 #print axioms rounded_attention_eq_hard
+#print axioms layerwise_eq_implies_stack_eq
 
 end Claim4Exact
