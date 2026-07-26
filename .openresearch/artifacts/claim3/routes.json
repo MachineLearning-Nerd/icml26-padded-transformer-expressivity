@@ -1,0 +1,59 @@
+{
+  "claim": 3,
+  "confidence": "LOW",
+  "final_verdict": "BLOCKED",
+  "routes": [
+    {
+      "route": 1,
+      "route_type": "source_derivation",
+      "interpretation": "Decompose each equality into upper iteration/stitching and lower complete-problem/reduction inclusions for every d>=1.",
+      "method": "Audit Lemmas 5.1-5.4, Corollary 5.1, Theorem 5.1, and Appendix C.3 step by step.",
+      "source_basis": "2605.30523v1 Section 5 and Appendix C.3.",
+      "command": "uv run --locked python repro/run_claim_routes.py",
+      "result": "The source gives a coherent proof plan: constant-depth simulation, r-fold circuit stitching, uniformity collapse, L reductions, and wide-circuit evaluation.",
+      "why_unresolved": "The semantic circuit evaluator, reduction framework, and FO-uniformity transformations are not machine-checked in this reproduction.",
+      "negative_control": "Finite function iteration is not accepted as evidence for FO-uniformity or a language-class lower bound."
+    },
+    {
+      "route": 2,
+      "route_type": "machine_or_combinatorial_check",
+      "interpretation": "Test the exact f^r composition mechanism while refusing to infer class equality from bounded truth tables.",
+      "method": "Run deterministic gate maps and exhaustive small truth-table compositions, plus the fail-closed route validator.",
+      "source_basis": "Lemma 5.1 composition mechanism and historical C3 verifier.",
+      "command": "uv run --locked python repro/run_audit.py",
+      "result": "All 54 deterministic maps and 3,024 finite compositions remain consistent through the tested depths.",
+      "why_unresolved": "The check has finite domains and contains no FO-uniform circuit generator, completeness reduction, or proof for every d.",
+      "negative_control": "The route ledger marks these checks as regression-only and blocks promotion to VERIFIED."
+    },
+    {
+      "route": 3,
+      "route_type": "independent_primary_source",
+      "interpretation": "Isolate the growing-precision AHAT endpoint inherited from Merrill–Sabharwal from the new constant-precision and SMAT extensions.",
+      "method": "Cross-read the primary NeurIPS paper's abstract/theorem scope with Eqs. (6)-(8) and Lemma 3.1 dependencies.",
+      "source_basis": "Merrill & Sabharwal, OpenReview O1abxStFcy; current paper Section 5 and Appendix C.3.",
+      "command": "orx lit \"Merrill Sabharwal 2025 fully uniform transformers TC depth looped AHAT\"",
+      "result": "The primary source supports polynomially padded AHATs with O(log^d n) looping at FO-uniform TC^d. The constant-precision AC^d construction and L-uniform SMAT transfer are new here.",
+      "why_unresolved": "Independent support does not cover both scored equalities, and the SMAT transfer inherits Claim 4's remaining obligations.",
+      "negative_control": "An AHAT theorem is not silently relabeled as an SMAT theorem, and O(log^d n) support is not by itself treated as the exact Theta-regime equality."
+    },
+    {
+      "route": 4,
+      "route_type": "falsification",
+      "interpretation": "Seek an admissible d>=1 looped family or FO-uniform circuit language contradicting either inclusion while preserving precision, width, padding, uniformity, and loop-count assumptions.",
+      "method": "Audit boundary d=1, exact loop-count conventions, the wide-circuit evaluator, inherited routing gadgets, and the unresolved AHAT-to-SMAT step.",
+      "source_basis": "Theorem 5.1, Definitions A.5-A.7, Appendix C.3, and Merrill–Sabharwal O1abxStFcy.",
+      "command": "uv run --locked python repro/run_claim_routes.py",
+      "result": "No valid class-separating counterexample was established. Proof gaps, an AHAT/SMAT transfer gap, or a failed finite implementation do not contradict the exact theorem.",
+      "why_unresolved": "Falsifying a universal complexity characterization requires a language separation or assumption-satisfying model counterexample, not a missing derivation.",
+      "negative_control": "The validator rejects any proposed counterexample that omits d>=1, polynomial padding, L-uniformity, the stated precision/width regime, or the Theta loop convention.",
+      "exact_assumptions_retested": true,
+      "counterexample_status": "NO_VALID_COUNTEREXAMPLE"
+    }
+  ],
+  "unresolved_obligations": [
+    "machine-check Lemma 5.1 circuit stitching and FO-uniformity collapse",
+    "machine-check constant-precision wide-AC^d evaluation and the reduction framework",
+    "close the AHAT-to-SMAT family transfer used by the growing-precision lower bound",
+    "prove both inclusions uniformly for every d>=1"
+  ]
+}

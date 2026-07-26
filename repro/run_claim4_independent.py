@@ -203,7 +203,10 @@ def main() -> None:
         "determinism": {"seed": SEED, "random_module": "Python stdlib MT19937"},
         "resource_certificate": {
             "domain": "all integer b in [2,64], supplemental to symbolic Lean proof",
-            "rows": resources,
+            "row_count": len(resources),
+            "first_row": resources[0],
+            "last_row": resources[-1],
+            "all_bounds_hold": all(row["bound_holds"] for row in resources),
         },
         "fixed_point_cross_check": {
             "precision_bits": "2..10",

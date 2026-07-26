@@ -1,0 +1,58 @@
+{
+  "claim": 2,
+  "confidence": "LOW",
+  "final_verdict": "BLOCKED",
+  "routes": [
+    {
+      "route": 1,
+      "route_type": "source_derivation",
+      "interpretation": "Separate the definitional identity V=Db from the theorem-dependent statement that volume governs expressivity robustness.",
+      "method": "Pin Definitions 2.1-2.3 and enumerate every restriction in the paragraph following Theorem 4.2.",
+      "source_basis": "2605.30523v1 Definitions 2.1-2.3, Theorem 4.2, Section 6.",
+      "command": "uv run --locked python repro/run_claim_routes.py",
+      "result": "The definition and quantifiers are source-verified. The robustness conclusion is conditional on Theorem 4.2.",
+      "why_unresolved": "Source transcription verifies what the authors define, not that the resulting expressivity characterization is mathematically true.",
+      "negative_control": "The checker rejects a claim contract that omits polynomial width or presents insufficient-volume models as characterized."
+    },
+    {
+      "route": 2,
+      "route_type": "machine_or_combinatorial_check",
+      "interpretation": "Test whether Db is an exact information-capacity threshold under the paper's actual fixed-point alphabet.",
+      "method": "Compute |F_b|=2(2^(2b)-1)+1 exactly and compare D-tuple capacity against the historical binary-cell proxy.",
+      "source_basis": "Appendix A.3 Definition A.1 and Definitions 2.1-2.3.",
+      "command": "uv run --locked python repro/run_claim_routes.py",
+      "result": "The historical proxy is rejected: at N=8,b=1,D=2 it says volume 2<3 cannot encode positions, while the actual F_1 has 7 values and 7^2>=8 tuples.",
+      "why_unresolved": "This falsifies only the historical simplified proxy, not the asymptotic volume definition or the full expressivity theorem.",
+      "negative_control": "The old D*b>=ceil(log2 N) finite boundary is explicitly prevented from serving as full-claim evidence."
+    },
+    {
+      "route": 3,
+      "route_type": "independent_primary_source",
+      "interpretation": "Ask whether prior padded-transformer results already establish width robustness at sufficient volume.",
+      "method": "Compare London–Kanade's log-width results with the arbitrary-width statement of Theorem 4.2.",
+      "source_basis": "London & Kanade, OpenReview eG5oh8l1WZ; current paper Theorem 4.1 and Theorem 4.2.",
+      "command": "orx lit \"London Kanade 2025 padded transformers expressivity constant width TC0 AC0\"",
+      "result": "The reference supplies specific width-regime endpoints, not the current paper's full volume-based robustness characterization.",
+      "why_unresolved": "Independent literature support is narrower than the scored claim.",
+      "negative_control": "A matching result at logarithmic width is not counted as evidence for every sufficient-volume width."
+    },
+    {
+      "route": 4,
+      "route_type": "falsification",
+      "interpretation": "Seek two admissible families on the same precision side with sufficient volume but different widths and different recognized language classes.",
+      "method": "Audit the theorem domain, the known printed routing mismatch, actual F_b capacity, and the insufficient-volume discussion for an assumption-satisfying counterexample.",
+      "source_basis": "Definitions 2.1-2.3, Theorem 4.2, Section 6, and Appendix C.2.",
+      "command": "uv run --locked python repro/run_claim_routes.py",
+      "result": "The finite proxy counterexample lies outside the theorem conclusion being tested, and the routing mismatch is repairable. No valid expressivity counterexample was established.",
+      "why_unresolved": "Capacity of positional codes is neither necessary nor sufficient by itself to separate language classes under all architecture assumptions.",
+      "negative_control": "The validator refuses to relabel a proxy mismatch or insufficient-volume example as theorem falsification.",
+      "exact_assumptions_retested": true,
+      "counterexample_status": "NO_VALID_COUNTEREXAMPLE"
+    }
+  ],
+  "unresolved_obligations": [
+    "prove Theorem 4.2's width-robust class equalities",
+    "show that all admissible sufficient-volume width/precision allocations are covered",
+    "avoid substituting positional-code capacity for transformer expressivity"
+  ]
+}

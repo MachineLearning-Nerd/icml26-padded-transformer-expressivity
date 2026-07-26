@@ -18,6 +18,24 @@
     "file": "pages/current-index.md",
     "children": [
       {
+        "slug": "claim-1-current",
+        "title": "Claim 1 — exact current audit",
+        "file": "pages/claim-1-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-2-current",
+        "title": "Claim 2 — exact current audit",
+        "file": "pages/claim-2-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-3-current",
+        "title": "Claim 3 — exact current audit",
+        "file": "pages/claim-3-current/page.md",
+        "children": []
+      },
+      {
         "slug": "claim-4-current",
         "title": "Claim 4 — current universal kernel certificate",
         "file": "pages/claim-4-current/page.md",

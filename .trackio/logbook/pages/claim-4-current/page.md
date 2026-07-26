@@ -66,21 +66,22 @@ Formal run on Hugging Face `cpu-upgrade`:
   "sorry_ax_dependency": false,
   "logical_cpus_visible": 64,
   "thread_cap": 1,
-  "source_sha256": "da35db1c376d5d96258f4ace8c5bfd0fe78ecc84f3cc83561bc4f4f2e30615ac",
-  "formal_runtime_seconds": 131.328937,
-  "cumulative_runtime_seconds": 137.261604
+  "source_sha256": "be1f47566c7dee4d9ce3ab4f41e63decb0ad52f0ba5de8d299a0fbe46011fd37",
+  "formal_runtime_seconds": 191.602762,
+  "cumulative_runtime_seconds": 199.074833
 }
 ```
 
-Experiment wall time was 2m33s. Required core estimate was one active proof
+Experiment wall time was approximately 3m30s. Required core estimate was one active proof
 core with 2–8 visible cores sufficient; `cpu-upgrade` was selected because
 the pinned Mathlib bootstrap/cache runtime was uncertain. The actual runner
 saw 64 logical CPUs and capped numeric/proof threads at one.
 
-The independent checker is rerun by the same command. Its raw JSON is
-available as
+The formal certificate is available as
+[`formal_certificate_run_96a14223.json`](../../../../.openresearch/artifacts/claim4/raw/formal_certificate_run_96a14223.json).
+The independent checker is rerun by the same command; its raw JSON is
 [`claim4_independent_checker.json`](../../../../.openresearch/artifacts/claim4/raw/claim4_independent_checker.json)
-after the packaging run.
+from run `96a14223-d5c0-43bd-aa53-00053a068b62`.
 
 ## Independent checker and negative control
 

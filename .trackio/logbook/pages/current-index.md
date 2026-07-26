@@ -20,6 +20,9 @@ verifiers.
 
 ## Navigation
 
+- [Claim 1 — exact current audit](#/claim-1-current)
+- [Claim 2 — exact current audit](#/claim-2-current)
+- [Claim 3 — exact current audit](#/claim-3-current)
 - [Claim 4 — current universal kernel certificate](#/claim-4-current)
 - [Historical rejected baseline — previous canonical index](#/historical-index)
 - [Historical rejected baseline — previous Claim 4 finite verifier](#/historical-claim-4)

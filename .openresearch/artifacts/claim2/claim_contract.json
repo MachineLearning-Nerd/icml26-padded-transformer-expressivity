@@ -1,0 +1,13 @@
+{
+  "paper": "2605.30523v1",
+  "claim": 2,
+  "source_anchor": "Definitions 2.1-2.3 and paragraph following Theorem 4.2",
+  "exact_statement": "Volume is V(N)=D(N)b(N), sufficient volume means V(N)=Omega(log N), and under Theorem 4.2's remaining restrictions expressivity is robust to width once this condition holds.",
+  "quantifiers": [
+    "asymptotic functions D(N) and b(N)",
+    "sufficiently large N in the Omega relation",
+    "polynomial padding and polynomial width for the expressivity conclusion"
+  ],
+  "final_verdict": "BLOCKED",
+  "confidence": "LOW"
+}

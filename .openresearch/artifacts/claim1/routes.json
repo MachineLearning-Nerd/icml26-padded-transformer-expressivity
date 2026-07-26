@@ -1,0 +1,59 @@
+{
+  "claim": 1,
+  "confidence": "LOW",
+  "final_verdict": "BLOCKED",
+  "routes": [
+    {
+      "route": 1,
+      "route_type": "source_derivation",
+      "interpretation": "Treat each equality as two language-class inclusions under all Theorem 4.2 premises.",
+      "method": "Reconstruct the eight-edge inclusion graph from Theorem 4.1, Lemma 4.1, Lemma 4.2, volume arithmetic, and width padding.",
+      "source_basis": "2605.30523v1, Theorem 4.1, Lemmas 4.1-4.2, Theorem 4.2, Appendix C.2.",
+      "command": "uv run --locked python repro/run_theorem42.py",
+      "result": "The graph closes only when cited/new source inclusions are accepted. It is a dependency map, not an independent proof.",
+      "why_unresolved": "The hard transformer/circuit inclusions remain imported prose obligations; a graph cannot certify their semantics or uniformity.",
+      "negative_control": "The printed second-layer pointer swap fails on all 79 noncoincident source/gate assignments; the repaired three-pointer construction passes, so the proof bug is exposed rather than hidden."
+    },
+    {
+      "route": 2,
+      "route_type": "machine_or_combinatorial_check",
+      "interpretation": "Ask whether the current Lean development proves the class inclusions rather than merely composes them.",
+      "method": "Kernel-check every theorem, prohibit sorry/admit/axiom tokens, and inspect #print axioms and theorem signatures.",
+      "source_basis": "formal/PaddedTransformer.lean at SHA 0956eaa3eb46a3985fef330fef15d2244db299dacfd2f941864c7566f754788d.",
+      "command": "uv run --locked python repro/run_lean_formal_check.py",
+      "result": "Eleven theorem reports kernel-check, but theorem42_from_source_inclusions explicitly takes the four source inclusions as hypotheses.",
+      "why_unresolved": "The exact theorem criticized by the live judge still assumes the mathematical content that Claim 1 needs.",
+      "negative_control": "The checker rejects proof-escape tokens and a sorryAx dependency; passing those checks does not promote assumed source inclusions."
+    },
+    {
+      "route": 3,
+      "route_type": "independent_primary_source",
+      "interpretation": "Separate endpoints established by prior work from width-regime extensions new to this paper.",
+      "method": "Cross-read London and Kanade's primary OpenReview paper against the current paper's Theorem 4.1 and Appendix C.2 adaptation.",
+      "source_basis": "London & Kanade (NeurIPS 2025), OpenReview eG5oh8l1WZ; current paper cites their Theorems 4.1, 4.5, C.5, C.7, C.11.",
+      "command": "orx lit \"London Kanade 2025 padded transformers expressivity constant width TC0 AC0\"",
+      "result": "The primary result supports log-width endpoints. Arbitrary-width collapse, the constant-width log-precision repair, and polynomial-width upper extensions are new obligations here.",
+      "why_unresolved": "The independent source cannot certify the new arbitrary-width theorem; the OpenReview PDF also rejected direct browser-UA curl with HTTP 403, so the campaign records the discoverable primary URL rather than inventing a source hash.",
+      "negative_control": "Treating Theorem 4.1 alone as Theorem 4.2 is rejected because it fixes log width and does not supply the new width quantifier."
+    },
+    {
+      "route": 4,
+      "route_type": "falsification",
+      "interpretation": "Seek a family satisfying sufficient volume, polynomial padding, polynomial width, the fixed-point model, and L-uniformity but lying outside the claimed class equality.",
+      "method": "Retest the printed Lemma 4.1 routing on noncoincident source/gate indices and then test whether the discovered mismatch survives the explicit constant-width repair.",
+      "source_basis": "2605.30523v1 Theorem 4.2 assumptions and Appendix C.2 Eq. (38); deterministic 79-assignment routing audit.",
+      "command": "uv run --locked python repro/run_theorem42_obligations.py",
+      "result": "The printed route is contradicted, but a six-coordinate constant-width repair restores the intended routing. No assumption-satisfying language-class counterexample was established.",
+      "why_unresolved": "A counterexample to one proof sentence is not a counterexample to the quantified theorem when an admissible repair exists.",
+      "negative_control": "The validator refuses to mark a local construction mismatch as FALSIFIED unless every theorem assumption holds and the repaired construction also fails.",
+      "exact_assumptions_retested": true,
+      "counterexample_status": "NO_VALID_COUNTEREXAMPLE"
+    }
+  ],
+  "unresolved_obligations": [
+    "machine-check the AC0 lower and upper inclusions with transformer and circuit semantics",
+    "machine-check the TC0 lower and upper inclusions including uniformity",
+    "prove the repaired constant-width routing inside those semantics",
+    "connect asymptotic sufficient-volume premises to the embeddings without assuming the target inclusions"
+  ]
+}
