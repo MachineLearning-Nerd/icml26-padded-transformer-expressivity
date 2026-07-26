@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import platform
 import re
 import shutil
 import subprocess
@@ -52,20 +53,32 @@ def main() -> None:
     if forbidden:
         raise SystemExit(f"forbidden proof escape token(s): {forbidden}")
 
+    toolchain = TOOLCHAIN.read_text(encoding="utf-8").strip()
+    elan = shutil.which("elan")
     lean = shutil.which("lean")
-    if not lean:
+    repository_lean = (
+        ROOT / ".orx-toolchain" / "lean-4.32.0-linux" / "bin" / "lean"
+    )
+    if elan:
+        lean_command = [elan, "run", toolchain, "lean"]
+    elif repository_lean.exists():
+        lean_command = [str(repository_lean)]
+    elif lean:
+        lean_command = [lean]
+    else:
         raise SystemExit(
-            "Lean not found. Install the pinned toolchain from formal/lean-toolchain."
+            "Lean/elan not found. Install the pinned toolchain from "
+            "formal/lean-toolchain."
         )
     version = subprocess.run(
-        [lean, "--version"], check=True, capture_output=True, text=True
+        [*lean_command, "--version"], check=True, capture_output=True, text=True
     ).stdout.strip()
-    expected = TOOLCHAIN.read_text(encoding="utf-8").strip().rsplit("v", 1)[-1]
+    expected = toolchain.rsplit("v", 1)[-1]
     if f"version {expected}" not in version:
         raise SystemExit(f"expected Lean {expected}, got: {version}")
 
     completed = subprocess.run(
-        [lean, str(SOURCE.relative_to(ROOT))],
+        [*lean_command, str(SOURCE.relative_to(ROOT))],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -83,17 +96,26 @@ def main() -> None:
     if len(axiom_reports) != 11:
         raise SystemExit(f"expected 11 axiom reports, got {len(axiom_reports)}")
 
+    if platform.system() == "Linux" and platform.machine() in ("x86_64", "amd64"):
+        archive_name = "lean-4.32.0-linux.zip"
+        archive_sha256 = (
+            "5320dc308f108775904d865b05df386e6bc7dee254e030a90177e8fcc36f0fbe"
+        )
+    else:
+        archive_name = "lean-4.32.0-darwin_aarch64.tar.zst"
+        archive_sha256 = (
+            "4faa4757f7ca5e7d9588a9de779550fa58bdf01498edb966f15029e2ea117e4e"
+        )
+
     certificate = {
         "verdict": "lean_kernel_verified",
         "lean_version": version,
-        "toolchain": TOOLCHAIN.read_text(encoding="utf-8").strip(),
+        "toolchain": toolchain,
         "official_release_archive": (
             "https://github.com/leanprover/lean4/releases/download/"
-            "v4.32.0/lean-4.32.0-darwin_aarch64.tar.zst"
+            f"v4.32.0/{archive_name}"
         ),
-        "release_archive_sha256": (
-            "4faa4757f7ca5e7d9588a9de779550fa58bdf01498edb966f15029e2ea117e4e"
-        ),
+        "release_archive_sha256": archive_sha256,
         "source": str(SOURCE.relative_to(ROOT)),
         "source_sha256": hashlib.sha256(source_bytes).hexdigest(),
         "forbidden_escape_tokens": forbidden,

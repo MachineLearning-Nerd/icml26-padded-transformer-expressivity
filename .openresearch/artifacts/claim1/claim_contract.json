@@ -1,0 +1,14 @@
+{
+  "paper": "2605.30523v1",
+  "claim": 1,
+  "source_anchor": "Theorem 4.2, Eqs. (4a)-(4b)",
+  "exact_statement": "Under sufficient volume and width at most polynomial, for every width function D(N), constant-precision polynomially padded L-uniform constant-depth transformers equal L-uniform AC0, and log-precision counterparts equal L-uniform TC0.",
+  "quantifiers": [
+    "for every admissible width function D(N)",
+    "for every language recognized by either model/class in each equality",
+    "asymptotically under sufficient volume",
+    "polynomial padding and polynomial upper bound on width"
+  ],
+  "final_verdict": "BLOCKED",
+  "confidence": "LOW"
+}

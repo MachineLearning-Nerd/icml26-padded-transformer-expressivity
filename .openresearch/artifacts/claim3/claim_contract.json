@@ -1,0 +1,14 @@
+{
+  "paper": "2605.30523v1",
+  "claim": 3,
+  "source_anchor": "Theorem 5.1, Eqs. (8a)-(8b)",
+  "exact_statement": "For every integer d>=1, polynomially padded L-uniform transformers with Theta(log^d N) looping have constant-precision/log-width expressivity exactly FO-uniform AC^d and log-precision/constant-width expressivity exactly FO-uniform TC^d.",
+  "quantifiers": [
+    "for every integer d>=1",
+    "for every admissible L-uniform transformer family",
+    "Theta(log^d N) loop count",
+    "both upper and lower language-class inclusions"
+  ],
+  "final_verdict": "BLOCKED",
+  "confidence": "LOW"
+}

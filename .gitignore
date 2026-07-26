@@ -9,3 +9,9 @@ vendor/
 wandb/
 .DS_Store
 upstream/
+!.openresearch/
+!.openresearch/**
+.openresearch/agent/
+.lake/
+.orx-toolchain/
+lake-manifest.json

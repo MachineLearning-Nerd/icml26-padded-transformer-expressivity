@@ -1,0 +1,27 @@
+{
+  "paper": "2605.30523v1",
+  "claim_number": 4,
+  "source_anchor": "Lemma 3.1; proof in Appendix C.1; fixed-point semantics in Appendix A.3",
+  "exact_statement": "For every logarithmic-precision L-uniform AHAT family {T_N}, there exists a logarithmic-precision L-uniform SMAT family {T'_N} such that, for every N in the natural numbers and every w in Sigma^N, the outputs of T_N and T'_N match.",
+  "quantifiers": [
+    "for every logarithmic-precision L-uniform AHAT family",
+    "there exists a logarithmic-precision L-uniform SMAT family",
+    "for every natural input length N",
+    "for every input w in Sigma^N"
+  ],
+  "paper_assumptions": [
+    "scores, activations, and parameters use the paper's fixed-point semantics",
+    "source precision b(N) is Theta(log N)",
+    "the transformer family is L-uniform",
+    "the architecture has a fixed finite number of layers",
+    "mixed precision b'=kappa*b is permitted internally as in Appendix A.4",
+    "layer normalization uses the fixed stabilizer required by Appendix B.3"
+  ],
+  "current_machine_checked_subcontract": {
+    "statement": "For every b>=2, every finite attention index set, every b-grid score table with all nonmaximal scores at least one b-grid step below the maximum, and arbitrary real values, b'=4b and tau=2^(-3b) make every mixed-grid-rounded softmax exponential exactly equal to the hard-max indicator; hence the real numerator, denominator, and attention quotient are identical, including ties.",
+    "status": "VERIFIED",
+    "scope_relation": "This is the universal numerical focusing kernel needed by Lemma 3.1, but is strictly narrower than the family-wide source claim."
+  },
+  "full_claim_verdict": "BLOCKED",
+  "blocker": "The certificate does not yet formalize the paper's complete mixed-precision range and iterative-rounding implementation for arbitrary log-precision constants, nor the logspace family constructor and all remaining sublayers."
+}

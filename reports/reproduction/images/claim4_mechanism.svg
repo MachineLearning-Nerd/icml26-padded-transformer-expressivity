@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="360" viewBox="0 0 1000 360" role="img" aria-labelledby="t d">
+  <title id="t">Claim 4 universal focusing mechanism</title>
+  <desc id="d">A source grid gap is amplified by inverse temperature, nonmax exponentials underflow, and rounded weights become exact hard indicators.</desc>
+  <rect width="1000" height="360" fill="#f7f4ed"/>
+  <text x="50" y="54" font-family="system-ui,sans-serif" font-size="27" font-weight="700" fill="#17212b">The certified mechanism</text>
+  <g font-family="system-ui,sans-serif">
+    <g><rect x="50" y="105" width="190" height="120" rx="14" fill="#dbe8ed" stroke="#7193a3"/><text x="145" y="145" text-anchor="middle" font-size="18" font-weight="700">b-grid scores</text><text x="145" y="178" text-anchor="middle" font-size="16">gap ≥ 2⁻ᵇ</text><text x="145" y="204" text-anchor="middle" font-size="14">ties allowed</text></g>
+    <path d="M245 165 H330" stroke="#586a73" stroke-width="3"/><path d="M330 165 l-13 -8 v16 z" fill="#586a73"/>
+    <g><rect x="335" y="105" width="190" height="120" rx="14" fill="#eee0c3" stroke="#aa8744"/><text x="430" y="145" text-anchor="middle" font-size="18" font-weight="700">Scale</text><text x="430" y="178" text-anchor="middle" font-size="16">τ = 2⁻³ᵇ</text><text x="430" y="204" text-anchor="middle" font-size="14">gap ≥ 2²ᵇ</text></g>
+    <path d="M530 165 H615" stroke="#586a73" stroke-width="3"/><path d="M615 165 l-13 -8 v16 z" fill="#586a73"/>
+    <g><rect x="620" y="105" width="190" height="120" rx="14" fill="#ecd8cd" stroke="#b37454"/><text x="715" y="145" text-anchor="middle" font-size="18" font-weight="700">Exponentiate</text><text x="715" y="178" text-anchor="middle" font-size="16">off-max &lt; 2⁻⁴ᵇ⁻¹</text><text x="715" y="204" text-anchor="middle" font-size="14">strict half-grid margin</text></g>
+    <path d="M815 165 H895" stroke="#586a73" stroke-width="3"/><path d="M895 165 l-13 -8 v16 z" fill="#586a73"/>
+    <g><rect x="820" y="248" width="135" height="70" rx="14" fill="#cfe5d9" stroke="#4e8d6d"/><text x="887" y="278" text-anchor="middle" font-size="18" font-weight="700">Round</text><text x="887" y="302" text-anchor="middle" font-size="16">{0,1} exactly</text></g>
+    <path d="M905 210 V243" stroke="#586a73" stroke-width="3"/><path d="M905 243 l-8 -13 h16 z" fill="#586a73"/>
+  </g>
+  <text x="50" y="286" font-family="system-ui,sans-serif" font-size="16" fill="#17212b">Lean 4.32 / Mathlib · every b ≥ 2 · arbitrary finite attention table · arbitrary values · arbitrary ties</text>
+  <text x="50" y="320" font-family="system-ui,sans-serif" font-size="15" fill="#8d3e20">Not yet certified: family-dependent range, iterative rounding throughout, and L-uniform constructor.</text>
+</svg>

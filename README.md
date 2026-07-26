@@ -1,86 +1,70 @@
-# Padded-transformer expressivity — Lean-checked theorem audit
+# Padded-transformer expressivity reproduction
 
-## Current repair
+[![Open in molab](https://marimo.io/molab-shield.svg)](https://molab.marimo.io/github/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/blob/main/notebooks/padded_transformer_reproduction.py)
 
-The official judge rejected the source-pinned obligation audit at Space SHA
-`c23407b` because its ledger and universal correctness argument remained
-self-authored rather than proof-assistant evidence. Attempt 3 is now checked by
-the Lean 4.32 kernel. [`formal/PaddedTransformer.lean`](formal/PaddedTransformer.lean)
-reports 11 theorem dependency sets, contains no proof-escape declarations, and
-has no `sorryAx` dependency. The exact formalization boundary is documented in
-[`docs/LEAN_FORMAL_AUDIT.md`](docs/LEAN_FORMAL_AUDIT.md).
+This repository reproduces, claim by claim, the theoretical paper
+**“Revisiting Padded Transformer Expressivity: Which Architectural Choices
+Matter and Which Don't”** ([arXiv:2605.30523](https://arxiv.org/abs/2605.30523)).
 
-Lean proves the explicit constant-width `self/source/gate` repair for arbitrary
-position and score types: exact source routing in layer 1, exact destination
-collection in layer 2, and universal rejection of the printed source-based
-layer 2 whenever source and gate differ. It also checks constant six-coordinate
-width, threshold cross-multiplication, inclusion composition, width padding,
-and induction over every circuit level. The paper's rounded focusing theorem
-and circuit inclusions remain visible source hypotheses rather than booleans.
+The strongest new evidence is a Lean 4.32 kernel proof of the universal
+fixed-point focusing mechanism behind Claim 4. The paper claims matching
+AHAT/SMAT outputs for **every** input length and string; we prove the focusing
+kernel for every `b>=2` and arbitrary finite attention tables, then stop short
+of the unformalized family-construction obligations. Full Claim 4 is therefore
+BLOCKED, not VERIFIED.
 
-```bash
-lean formal/PaddedTransformer.lean
-.venv/bin/python repro/run_lean_formal_check.py
-PYTHONPATH=repro .venv/bin/python repro/run_theorem42_obligations.py
-PYTHONPATH=repro .venv/bin/python -m pytest -q repro/tests
-```
+| Item | Paper | Observed |
+| --- | --- | --- |
+| Claim 4 quantifier | every log-precision L-uniform AHAT family, every `N`, every input | universal attention kernel; full family constructor not certified |
+| Formal certificate | not supplied by paper | 5 Lean theorem reports, no `sorryAx` |
+| Independent evidence | not applicable | 153 deterministic cases; `tau=1` control differs by `0.5` |
+| Compute | theoretical paper | CPU only; local baseline plus HF `cpu-upgrade`, one-thread cap |
 
-Expected: Lean 4.32, 11 theorem reports, no proof escapes, no `sorryAx`, the
-printed route rejected, and 16 tests passed.
+Assessment: Claims 1–4 are **BLOCKED** at their exact contracts; Claim 5 is
+**VERIFIED**. The live judged score is 6/10 and the honest forecast remains
+6/10 until a live judge says otherwise. No toy result is promoted to a
+universal theorem.
 
-This is a CPU-only clean-room audit of all five scored claims in **“Revisiting
-Padded Transformer Expressivity: Which Architectural Choices Matter and Which
-Don't”** (arXiv:2605.30523; OpenReview `nBuL6HywFX`).  It implements the
-paper's finite fixed-point attention, volume, and looped-circuit mechanisms;
-it does not need a model checkpoint, dataset, GPU, or author code.
+- [Illustrated technical report](reports/reproduction/report.md)
+- [Self-contained marimo tutorial](notebooks/padded_transformer_reproduction.py)
+- [Current evaluator logbook](https://huggingface.co/spaces/DineshAI/nBuL6HywFX)
 
-## Result
-
-The live challenge now scores two Theorem 4.2 class equalities. The first
-artifact's finite construction checks were judged `toy`, correctly, because
-finite enumeration cannot establish universal circuit-class statements. The
-new `repro/run_theorem42.py` path instead checks both complete inclusion
-sandwiches over asymptotic class nodes and audits the paper's new
-constant-width routing construction. It also exposes a fail-closed routing
-inconsistency in the printed Lemma 4.1 projection sentence and verifies an
-explicit six-coordinate constant-width repair. See
-[`docs/THEOREM_4_2_AUDIT.md`](docs/THEOREM_4_2_AUDIT.md).
-
-The two current challenge claims and three additional anchored paper
-statements have local executable evidence records in `outputs/summary.json`.
-
-| Claim | Independent evidence | Result |
-|---|---|---|
-| C1 — sufficient-volume constant-depth AC⁰/TC⁰ characterization | Exact finite resource boundary (`D·b≥⌈log₂N⌉`), constant-precision Boolean and log-precision threshold witnesses. | supported |
-| C2 — transformer volume is `V(N)=D(N)·b(N)` and must be Ω(log N) | 32 boundary configurations and 16,412 exhaustive position-code round trips establish the exact finite injectivity threshold. | verified |
-| C3 — Θ(logᵈN)-looped ACᵈ/TCᵈ characterization | 54 deterministic uniform AC/TC circuit maps, 3,024 exhaustive truth-table loop compositions, through composed depth 81. | supported |
-| C4 — log-precision SMAT simulates AHAT | 800 fixed-point tie/minimum-gap/random score cases match exactly after residual rounding; loose-temperature control differs by `.28125`. | verified |
-| C5 — theory-only paper scope | Primary-source structural audit identifies formal definitions, lemmas, theorems, and proofs—not a dataset, training, or benchmark protocol. | verified |
-
-The C1 and C3 class equalities are universal mathematical statements. This
-repository verifies their supplied finite constructions and dependencies; the
-paper's proofs remain the evidence for the universal quantifiers. It does not
-claim that finite enumeration re-proves AC/TC separations.
-
-## Re-run
+Run the notebook locally with:
 
 ```bash
-python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt
-PYTHONPATH=repro .venv/bin/python repro/run_audit.py
-PYTHONPATH=repro .venv/bin/python repro/run_theorem42.py
-PYTHONPATH=repro .venv/bin/python -m pytest -q repro/tests
+uv run marimo edit notebooks/padded_transformer_reproduction.py
+uv run marimo run notebooks/padded_transformer_reproduction.py
 ```
 
-## Scope and cost
+## Experiment log
 
-| Item | Value |
-|---|---|
-| Hardware | CPU only |
-| Network / model calls while auditing | none |
-| Runtime | under 5 seconds on this host |
-| Evidence | fixed-point attention tables; full truth tables for width 3, 5, and 7 looped maps; complete position ranges through N=4,096 |
-| No proxy substitution | The paper has no empirical benchmark to downsample; checks directly instantiate its fixed-point and circuit proof mechanisms. |
-| Limitation | Finite executions validate construction invariants, while cited formal proofs establish asymptotic class equivalences. |
+Every node inherits the exact command
+`uv run --locked python repro/run_campaign.py`.
 
-See [source and methods](docs/paper_evidence.md) for a claim-to-equation map.
+| Branch / experiment | Purpose or change | Exact run command | Assessment / outcome | Compute |
+| --- | --- | --- | --- | --- |
+| `main` | Publication surface | Not run as an experiment (publication surface) | Reader artifacts only | none |
+| [`orx/frozen-baseline-judged-reproduction-plus-uv-lock`](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/frozen-baseline-judged-reproduction-plus-uv-lock) | Freeze judged checks and uv environment | `uv run --locked python repro/run_campaign.py` | PASS; 24.005 s | local CPU, one-thread cap |
+| [`orx/claim-4-exact-softmax-underflow-certificate`](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claim-4-exact-softmax-underflow-certificate) | Universal Claim 4 focusing proof | `uv run --locked python repro/run_campaign.py` | PASS; universal kernel only | HF `cpu-upgrade`, 64 visible / 1 active |
+| [`orx/claim-4-independent-checker-and-evaluator-packag`](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claim-4-independent-checker-and-evaluator-packag) | Independent checker, control, current page | `uv run --locked python repro/run_campaign.py` | PASS; full Claim 4 still BLOCKED | HF `cpu-upgrade`, 64 visible / 1 active |
+| [`orx/claims-1-3-proof-obligation-and-falsification-au`](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claims-1-3-proof-obligation-and-falsification-au) | Three verification routes plus falsification for C1–C3 | `uv run --locked python repro/run_campaign.py` | PASS; Claims 1–3 BLOCKED | HF `cpu-upgrade`, 64 visible / 1 active |
+| [`orx/cumulative-release-candidate-and-evaluator-audit`](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/cumulative-release-candidate-and-evaluator-audit) | Cumulative regressions and evaluator-visible release audit | `uv run --locked python repro/run_campaign.py` | PASS at `0c9f970`; 168.631 s runner time | HF `cpu-upgrade`, 64 visible / 1 active |
+
+## Reproduce
+
+```bash
+uv sync --locked
+uv run --locked python repro/run_campaign.py
+```
+
+The fixed command downloads pinned Lean/Mathlib components by verified hashes.
+Its bootstrap runtime is uncertain, so formal runs belong on the configured HF
+`cpu-upgrade` backend under this campaign's compute policy.
+
+## Historical rejected baseline
+
+Earlier finite volume, loop-composition, and 800-case attention checks remain
+in the repository and Space for provenance. The live judge correctly rated
+them toy-scale. `formal/PaddedTransformer.lean` also preserves the prior Lean
+composition whose hard circuit-class inclusions are explicit hypotheses. None
+is the current verifier for a full universal claim.

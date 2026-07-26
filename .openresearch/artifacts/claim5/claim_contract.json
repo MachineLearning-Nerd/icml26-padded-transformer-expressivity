@@ -1,0 +1,13 @@
+{
+  "paper": "2605.30523v1",
+  "claim": 5,
+  "source_anchor": "Sections 1-6 and Appendices A-C",
+  "exact_statement": "The paper is theoretical and contains no empirical benchmark, dataset, model-training procedure, or measured training result.",
+  "quantifiers": [
+    "all main sections",
+    "all appendices",
+    "the paper's claimed contributions"
+  ],
+  "final_verdict": "VERIFIED",
+  "confidence": "HIGH"
+}

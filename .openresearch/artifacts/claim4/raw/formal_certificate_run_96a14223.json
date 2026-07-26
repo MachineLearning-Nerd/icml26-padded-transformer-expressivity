@@ -1,0 +1,27 @@
+{
+  "run_id": "96a14223-d5c0-43bd-aa53-00053a068b62",
+  "git_sha": "d61755f5604e2093f6ff6629bc3996ac1bb27725",
+  "verdict": "lean_kernel_verified",
+  "paper": "2605.30523",
+  "claim": 4,
+  "source": "formal/Claim4Exact.lean",
+  "source_sha256": "be1f47566c7dee4d9ce3ab4f41e63decb0ad52f0ba5de8d299a0fbe46011fd37",
+  "toolchain": "leanprover/lean4:v4.32.0",
+  "mathlib_revision": "81a5d257c8e410db227a6665ed08f64fea08e997",
+  "logical_cpus_visible": 64,
+  "thread_cap": 1,
+  "kernel_checked_theorems": 5,
+  "sorry_ax_dependency": false,
+  "axiom_reports": [
+    "'Claim4Exact.exp_neg_succ_lt_half_grid' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "'Claim4Exact.off_max_exponential_underflows' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "'Claim4Exact.roundedKernel_eq_hardKernel' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "'Claim4Exact.rounded_attention_eq_hard' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "'Claim4Exact.layerwise_eq_implies_stack_eq' does not depend on any axioms"
+  ],
+  "certificate_runtime_seconds": 191.602762,
+  "stage_runtime_seconds": 191.915964,
+  "campaign_runtime_seconds": 199.074833,
+  "experiment_wall_duration": "approximately 3m30s",
+  "evidence_channel": "orx logs 96a14223-d5c0-43bd-aa53-00053a068b62"
+}

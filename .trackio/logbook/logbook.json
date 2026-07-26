@@ -11,34 +11,70 @@
     "icml2026-repro",
     "paper-nBuL6HywFX"
   ],
-  "updated_at": "2026-07-19T12:37:00+00:00",
+  "updated_at": "2026-07-26T23:25:00+05:30",
   "root": {
-    "slug": "index",
-    "title": "Reproduction: Revisiting Padded Transformer Expressivity: Which Architectural Choices Matter and Which Don't",
-    "file": "pages/index.md",
+    "slug": "current",
+    "title": "Current reproduction status",
+    "file": "pages/current-index.md",
     "children": [
       {
-        "slug": "executive-summary",
-        "title": "Executive summary",
-        "file": "pages/executive-summary/page.md",
+        "slug": "claim-1-current",
+        "title": "Claim 1 — exact current audit",
+        "file": "pages/claim-1-current/page.md",
         "children": []
       },
       {
-        "slug": "claim-1",
-        "title": "Claim 1",
-        "file": "pages/claim-1/page.md",
+        "slug": "claim-2-current",
+        "title": "Claim 2 — exact current audit",
+        "file": "pages/claim-2-current/page.md",
         "children": []
       },
       {
-        "slug": "claim-2",
-        "title": "Claim 2",
-        "file": "pages/claim-2/page.md",
+        "slug": "claim-3-current",
+        "title": "Claim 3 — exact current audit",
+        "file": "pages/claim-3-current/page.md",
         "children": []
       },
       {
-        "slug": "conclusion",
-        "title": "Conclusion",
-        "file": "pages/conclusion/page.md",
+        "slug": "claim-4-current",
+        "title": "Claim 4 — current universal kernel certificate",
+        "file": "pages/claim-4-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5-current",
+        "title": "Claim 5 — theory-only scope",
+        "file": "pages/claim-5-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "visibility-matrix",
+        "title": "Evaluator visibility matrix",
+        "file": "pages/visibility-matrix/page.md",
+        "children": []
+      },
+      {
+        "slug": "release-report",
+        "title": "Release report",
+        "file": "pages/release-report/page.md",
+        "children": []
+      },
+      {
+        "slug": "evaluator-red-team",
+        "title": "Evaluator-blind red-team record",
+        "file": "pages/evaluator-red-team/page.md",
+        "children": []
+      },
+      {
+        "slug": "historical-index",
+        "title": "Historical rejected baseline — previous canonical index",
+        "file": "pages/index.md",
+        "children": []
+      },
+      {
+        "slug": "historical-claim-4",
+        "title": "Historical rejected baseline — previous Claim 4 finite verifier",
+        "file": "legacy-pages/c4-ahat-to-smat/page.md",
         "children": []
       }
     ]
