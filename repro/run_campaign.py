@@ -36,6 +36,10 @@ COMMANDS = (
         "claims123_route_audit",
         (sys.executable, "repro/run_claim_routes.py"),
     ),
+    (
+        "release_and_visibility_audit",
+        (sys.executable, "repro/run_release_audit.py"),
+    ),
     ("finite_claim_regressions", (sys.executable, "repro/run_audit.py")),
     ("theorem42_graph_regression", (sys.executable, "repro/run_theorem42.py")),
     (

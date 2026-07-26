@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="t d">
+  <title id="t">Claim status after the reproduction campaign</title>
+  <desc id="d">Claims one through four are blocked at their full universal contract. Claim five is verified. Claim four has a verified universal focusing kernel.</desc>
+  <rect width="1000" height="420" fill="#f7f4ed"/>
+  <text x="52" y="62" font-family="system-ui,sans-serif" font-size="28" font-weight="700" fill="#17212b">Exact claim verdicts</text>
+  <text x="52" y="94" font-family="system-ui,sans-serif" font-size="16" fill="#4b5965">Full credit requires the complete quantified statement—not a finite proxy.</text>
+  <g font-family="system-ui,sans-serif" font-size="18">
+    <text x="52" y="150" fill="#17212b">C1 · constant-depth classes</text><rect x="345" y="128" width="520" height="30" rx="6" fill="#e0ddd5"/><rect x="345" y="128" width="390" height="30" rx="6" fill="#d98555"/><text x="880" y="150" fill="#8d3e20">BLOCKED</text>
+    <text x="52" y="202" fill="#17212b">C2 · sufficient volume</text><rect x="345" y="180" width="520" height="30" rx="6" fill="#e0ddd5"/><rect x="345" y="180" width="390" height="30" rx="6" fill="#d98555"/><text x="880" y="202" fill="#8d3e20">BLOCKED</text>
+    <text x="52" y="254" fill="#17212b">C3 · looped classes</text><rect x="345" y="232" width="520" height="30" rx="6" fill="#e0ddd5"/><rect x="345" y="232" width="390" height="30" rx="6" fill="#d98555"/><text x="880" y="254" fill="#8d3e20">BLOCKED</text>
+    <text x="52" y="306" fill="#17212b">C4 · AHAT → SMAT</text><rect x="345" y="284" width="520" height="30" rx="6" fill="#e0ddd5"/><rect x="345" y="284" width="445" height="30" rx="6" fill="#c9a642"/><text x="880" y="306" fill="#725b0d">BLOCKED</text>
+    <text x="52" y="358" fill="#17212b">C5 · theory-only scope</text><rect x="345" y="336" width="520" height="30" rx="6" fill="#e0ddd5"/><rect x="345" y="336" width="520" height="30" rx="6" fill="#3a8b66"/><text x="880" y="358" fill="#216347">VERIFIED</text>
+  </g>
+  <text x="345" y="397" font-family="system-ui,sans-serif" font-size="14" fill="#725b0d">C4’s universal focusing kernel is Lean-verified; family construction remains open.</text>
+</svg>

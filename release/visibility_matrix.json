@@ -1,0 +1,60 @@
+{
+  "entrypoint": "pages/current-index.md",
+  "rows": [
+    {
+      "claim": 1,
+      "canonical_page": "pages/claim-1-current/page.md",
+      "code_visible": true,
+      "data_inline": true,
+      "raw_link": true,
+      "checker": true,
+      "control": true,
+      "exact_claim_tested": true,
+      "reviewer_verdict": "BLOCKED"
+    },
+    {
+      "claim": 2,
+      "canonical_page": "pages/claim-2-current/page.md",
+      "code_visible": true,
+      "data_inline": true,
+      "raw_link": true,
+      "checker": true,
+      "control": true,
+      "exact_claim_tested": true,
+      "reviewer_verdict": "BLOCKED"
+    },
+    {
+      "claim": 3,
+      "canonical_page": "pages/claim-3-current/page.md",
+      "code_visible": true,
+      "data_inline": true,
+      "raw_link": true,
+      "checker": true,
+      "control": true,
+      "exact_claim_tested": true,
+      "reviewer_verdict": "BLOCKED"
+    },
+    {
+      "claim": 4,
+      "canonical_page": "pages/claim-4-current/page.md",
+      "code_visible": true,
+      "data_inline": true,
+      "raw_link": true,
+      "checker": true,
+      "control": true,
+      "exact_claim_tested": true,
+      "reviewer_verdict": "BLOCKED"
+    },
+    {
+      "claim": 5,
+      "canonical_page": "pages/claim-5-current/page.md",
+      "code_visible": true,
+      "data_inline": true,
+      "raw_link": true,
+      "checker": true,
+      "control": true,
+      "exact_claim_tested": true,
+      "reviewer_verdict": "VERIFIED"
+    }
+  ]
+}

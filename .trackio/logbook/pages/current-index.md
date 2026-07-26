@@ -24,6 +24,10 @@ verifiers.
 - [Claim 2 — exact current audit](#/claim-2-current)
 - [Claim 3 — exact current audit](#/claim-3-current)
 - [Claim 4 — current universal kernel certificate](#/claim-4-current)
+- [Claim 5 — theory-only scope](#/claim-5-current)
+- [Evaluator visibility matrix](#/visibility-matrix)
+- [Release report](#/release-report)
+- [Evaluator-blind red-team record](#/evaluator-red-team)
 - [Historical rejected baseline — previous canonical index](#/historical-index)
 - [Historical rejected baseline — previous Claim 4 finite verifier](#/historical-claim-4)
 

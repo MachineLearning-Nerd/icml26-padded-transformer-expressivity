@@ -45,9 +45,9 @@ uv run --locked python repro/run_campaign.py
 
 Current source:
 
-- `formal/Claim4Exact.lean`
-- `repro/run_claim4_formal.py`
-- `repro/run_claim4_independent.py`
+- [`formal/Claim4Exact.lean`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/blob/main/formal/Claim4Exact.lean)
+- [`repro/run_claim4_formal.py`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/blob/main/repro/run_claim4_formal.py)
+- [`repro/run_claim4_independent.py`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/blob/main/repro/run_claim4_independent.py)
 
 The cumulative command is fail-closed and exits nonzero on a kernel-check
 failure, a dependency mismatch, an independent-check failure, or a negative
@@ -78,10 +78,12 @@ the pinned Mathlib bootstrap/cache runtime was uncertain. The actual runner
 saw 64 logical CPUs and capped numeric/proof threads at one.
 
 The formal certificate is available as
-[`formal_certificate_run_96a14223.json`](../../../../.openresearch/artifacts/claim4/raw/formal_certificate_run_96a14223.json).
+[`formal_certificate_run_96a14223.json`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/resolve/main/data/claim4/formal_certificate_run_96a14223.json).
 The independent checker is rerun by the same command; its raw JSON is
-[`claim4_independent_checker.json`](../../../../.openresearch/artifacts/claim4/raw/claim4_independent_checker.json)
+[`claim4_independent_checker.json`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/resolve/main/data/claim4/claim4_independent_checker.json)
 from run `96a14223-d5c0-43bd-aa53-00053a068b62`.
+That run used Git
+`d61755f5604e2093f6ff6629bc3996ac1bb27725`.
 
 ## Independent checker and negative control
 

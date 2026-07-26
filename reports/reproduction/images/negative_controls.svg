@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="380" viewBox="0 0 1000 380" role="img" aria-labelledby="t d">
+  <title id="t">Negative controls</title>
+  <desc id="d">Loose temperature differs from hard attention by one half, and the historical binary capacity proxy is rejected by the paper's actual fixed-point alphabet.</desc>
+  <rect width="1000" height="380" fill="#f7f4ed"/>
+  <text x="52" y="55" font-family="system-ui,sans-serif" font-size="27" font-weight="700" fill="#17212b">Controls fail for the intended reason</text>
+  <g font-family="system-ui,sans-serif">
+    <text x="65" y="112" font-size="18" font-weight="700" fill="#17212b">Temperature focusing</text>
+    <line x1="65" y1="295" x2="440" y2="295" stroke="#86949b" stroke-width="2"/>
+    <rect x="115" y="135" width="105" height="160" fill="#3a8b66"/><text x="167" y="128" text-anchor="middle" font-size="17">1.00</text><text x="167" y="322" text-anchor="middle" font-size="15">AHAT</text>
+    <rect x="275" y="215" width="105" height="80" fill="#d98555"/><text x="327" y="208" text-anchor="middle" font-size="17">0.50</text><text x="327" y="322" text-anchor="middle" font-size="15">SMAT, τ=1</text>
+    <text x="65" y="352" font-size="15" fill="#8d3e20">Expected disagreement = 0.50</text>
+    <text x="555" y="112" font-size="18" font-weight="700" fill="#17212b">Historical capacity proxy</text>
+    <rect x="555" y="140" width="360" height="65" rx="10" fill="#ecd8cd"/><text x="735" y="168" text-anchor="middle" font-size="16">binary proxy: D·b = 2 &lt; 3</text><text x="735" y="191" text-anchor="middle" font-size="14">predicts insufficient code capacity</text>
+    <rect x="555" y="225" width="360" height="65" rx="10" fill="#cfe5d9"/><text x="735" y="253" text-anchor="middle" font-size="16">paper F₁: |F₁|² = 7² = 49 ≥ 8</text><text x="735" y="276" text-anchor="middle" font-size="14">actual alphabet rejects the proxy</text>
+    <text x="555" y="326" font-size="14" fill="#4b5965">This rejects only the old verifier—not Definition 2.3.</text>
+  </g>
+</svg>

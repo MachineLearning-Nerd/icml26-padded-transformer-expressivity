@@ -42,6 +42,30 @@
         "children": []
       },
       {
+        "slug": "claim-5-current",
+        "title": "Claim 5 — theory-only scope",
+        "file": "pages/claim-5-current/page.md",
+        "children": []
+      },
+      {
+        "slug": "visibility-matrix",
+        "title": "Evaluator visibility matrix",
+        "file": "pages/visibility-matrix/page.md",
+        "children": []
+      },
+      {
+        "slug": "release-report",
+        "title": "Release report",
+        "file": "pages/release-report/page.md",
+        "children": []
+      },
+      {
+        "slug": "evaluator-red-team",
+        "title": "Evaluator-blind red-team record",
+        "file": "pages/evaluator-red-team/page.md",
+        "children": []
+      },
+      {
         "slug": "historical-index",
         "title": "Historical rejected baseline — previous canonical index",
         "file": "pages/index.md",

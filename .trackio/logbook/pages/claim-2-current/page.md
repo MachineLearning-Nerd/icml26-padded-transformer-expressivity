@@ -21,5 +21,16 @@ The scientific negative control uses Appendix A.3's actual alphabet. At
 it proves only that the old finite proxy was not faithful evidence.
 
 Raw ledger:
-[`routes.json`](../../../../.openresearch/artifacts/claim2/routes.json).
-Current checker: `repro/run_claim_routes.py`.
+[`routes.json`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/resolve/main/data/claim2/routes.json).
+Current checker:
+[`repro/run_claim_routes.py`](https://huggingface.co/spaces/DineshAI/nBuL6HywFX/blob/main/repro/run_claim_routes.py).
+Fixed command:
+
+```bash
+uv run --locked python repro/run_campaign.py
+```
+
+Run `8a8dfd82-b82a-4287-8bfe-306ff93c8d8b`, Git
+`3c3c0d56ed844c2961e7c8a63ebe3e4ac2ef2dec`, completed on Hugging Face
+`cpu-upgrade` in 3m32s (runner `199.125634` seconds), with 64 logical CPUs
+visible and a one-thread cap. No stochastic seed applies.
