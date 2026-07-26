@@ -34,6 +34,7 @@ COMMANDS = (
         (sys.executable, "repro/run_theorem42_obligations.py"),
     ),
     ("lean_kernel_regression", (sys.executable, "repro/run_lean_formal_check.py")),
+    ("claim4_universal_formal", (sys.executable, "repro/run_claim4_formal.py")),
     ("pytest_regression", (sys.executable, "-m", "pytest", "-q")),
 )
 
@@ -55,9 +56,10 @@ def main() -> None:
         ).stdout.strip(),
         "python": sys.version.split()[0],
         "platform": platform.platform(),
-        "required_core_estimate": 1,
-        "selected_backend": "local",
-        "selected_flavor": "local-single-core",
+        "required_core_estimate": "2-8 visible cores; proof process capped at 1",
+        "selected_backend": "hf",
+        "selected_flavor": "cpu-upgrade",
+        "selection_reason": "Mathlib bootstrap/cache retrieval has uncertain runtime",
         "logical_cpus_visible": os.cpu_count(),
         "thread_cap": 1,
         "commands": [],
