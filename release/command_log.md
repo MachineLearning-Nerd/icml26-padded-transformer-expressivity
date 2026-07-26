@@ -42,6 +42,10 @@ orx create-experiment 9ca20696-2add-457e-9aa9-5c5502029fa3 --title "Claim 4: ind
 orx exp run 7acd1d5f-406a-43dd-9b04-9ba1986e775b --backend hf --flavor cpu-upgrade --image ghcr.io/astral-sh/uv:python3.12-bookworm --timeout 1h
 orx create-experiment 9ca20696-2add-457e-9aa9-5c5502029fa3 --title "Claims 1-3: proof-obligation and falsification audit" --parent 7acd1d5f-406a-43dd-9b04-9ba1986e775b
 orx exp run 79c0b1f8-a5f8-41eb-bedb-481ce1568929 --backend hf --flavor cpu-upgrade --image ghcr.io/astral-sh/uv:python3.12-bookworm --timeout 1h
+orx create-experiment 9ca20696-2add-457e-9aa9-5c5502029fa3 --title "Cumulative release candidate and evaluator audit" --parent 79c0b1f8-a5f8-41eb-bedb-481ce1568929
+orx exp run 5d3b58bf-5f41-4bdb-8051-5581ba92d2a1 --backend hf --flavor cpu-upgrade --image ghcr.io/astral-sh/uv:python3.12-bookworm --timeout 1h
+orx create-experiment 9ca20696-2add-457e-9aa9-5c5502029fa3 --title "Publication snapshot: pin release run and red-team traversal" --parent 5d3b58bf-5f41-4bdb-8051-5581ba92d2a1
+orx exp run 8fbffabd-19c2-44b0-94d0-e4420507733f --backend hf --flavor cpu-upgrade --image ghcr.io/astral-sh/uv:python3.12-bookworm --timeout 1h
 ```
 
 Every run was followed by `orx exp wait`, `orx runs`, and `orx logs`; terminal

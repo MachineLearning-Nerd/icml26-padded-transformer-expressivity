@@ -79,6 +79,7 @@ Two controls materially changed the interpretation:
 | Claim 4 universal kernel | five-theorem predecessor proof passed | HF `cpu-upgrade`, 64 visible / 1 active | 137.262 s |
 | Claim 4 package | independent checker and control passed | HF `cpu-upgrade`, 64 visible / 1 active | 199.075 s |
 | Claims 1–3 routes | all route/negative-control gates passed | HF `cpu-upgrade`, 64 visible / 1 active | 199.126 s |
+| Cumulative release candidate | regressions, visibility, manifest, controls passed at `0c9f970` | HF `cpu-upgrade`, 64 visible / 1 active | 168.631 s |
 
 No GPU was used. Hugging Face job pricing was not exposed by `orx`, so monetary
 cost is reported as unavailable rather than guessed.
@@ -95,6 +96,7 @@ The winning evidence lineage is:
 - [Claim 4 universal kernel branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claim-4-exact-softmax-underflow-certificate)
 - [Claim 4 package branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claim-4-independent-checker-and-evaluator-packag)
 - [Claims 1–3 route-audit branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claims-1-3-proof-obligation-and-falsification-au)
+- [Cumulative release-candidate branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/cumulative-release-candidate-and-evaluator-audit)
 
 A full 10/10-grade reproduction would still need semantic proof certificates
 for the AC0/TC0 and FO-uniform equalities, plus the complete mixed-precision
