@@ -9,6 +9,7 @@ import os
 import platform
 import shutil
 import subprocess
+import tarfile
 import tempfile
 import time
 import urllib.request
@@ -27,6 +28,13 @@ LINUX_ZIP_URL = (
 )
 LINUX_ZIP_SHA256 = (
     "5320dc308f108775904d865b05df386e6bc7dee254e030a90177e8fcc36f0fbe"
+)
+LEANTAR_URL = (
+    "https://github.com/digama0/leangz/releases/download/v0.1.20/"
+    "leantar-v0.1.20-x86_64-unknown-linux-musl.tar.gz"
+)
+LEANTAR_SHA256 = (
+    "1789878731efbd6eb56515dbe511f7836547defde237cf5e4b29e78eaedaeb86"
 )
 FORBIDDEN = ("sorry", "admit", "axiom", "unsafe")
 
@@ -78,31 +86,59 @@ def ensure_lake(env: dict[str, str]) -> Path:
 
     cache_root = ROOT / ".orx-toolchain"
     lake = cache_root / "lean-4.32.0-linux" / "bin" / "lake"
-    if lake.exists():
-        return lake
-
+    leantar = cache_root / "lean-4.32.0-linux" / "bin" / "leantar"
     cache_root.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="claim4-lean-") as temporary:
-        archive = Path(temporary) / "lean.zip"
-        request = urllib.request.Request(
-            LINUX_ZIP_URL,
-            headers={"User-Agent": "OpenResearch-Reproduction/1.0"},
-        )
-        print("Downloading pinned Lean release archive", flush=True)
-        with urllib.request.urlopen(request, timeout=120) as response:
-            with archive.open("wb") as output:
-                shutil.copyfileobj(response, output)
-        observed = sha256(archive)
-        if observed != LINUX_ZIP_SHA256:
-            raise SystemExit(
-                f"Lean archive SHA-256 mismatch: {observed} != {LINUX_ZIP_SHA256}"
+        temporary_root = Path(temporary)
+        if not lake.exists():
+            archive = temporary_root / "lean.zip"
+            request = urllib.request.Request(
+                LINUX_ZIP_URL,
+                headers={"User-Agent": "OpenResearch-Reproduction/1.0"},
             )
-        print("Lean archive SHA-256 verified:", observed, flush=True)
-        with zipfile.ZipFile(archive) as bundle:
-            bundle.extractall(cache_root)
-        for executable in (cache_root / "lean-4.32.0-linux" / "bin").iterdir():
-            if executable.is_file():
-                executable.chmod(executable.stat().st_mode | 0o111)
+            print("Downloading pinned Lean release archive", flush=True)
+            with urllib.request.urlopen(request, timeout=120) as response:
+                with archive.open("wb") as output:
+                    shutil.copyfileobj(response, output)
+            observed = sha256(archive)
+            if observed != LINUX_ZIP_SHA256:
+                raise SystemExit(
+                    f"Lean archive SHA-256 mismatch: {observed} != {LINUX_ZIP_SHA256}"
+                )
+            print("Lean archive SHA-256 verified:", observed, flush=True)
+            with zipfile.ZipFile(archive) as bundle:
+                bundle.extractall(cache_root)
+            for executable in (
+                cache_root / "lean-4.32.0-linux" / "bin"
+            ).iterdir():
+                if executable.is_file():
+                    executable.chmod(executable.stat().st_mode | 0o111)
+
+        if not leantar.exists():
+            archive = temporary_root / "leantar.tar.gz"
+            request = urllib.request.Request(
+                LEANTAR_URL,
+                headers={"User-Agent": "OpenResearch-Reproduction/1.0"},
+            )
+            print("Downloading pinned leantar release archive", flush=True)
+            with urllib.request.urlopen(request, timeout=120) as response:
+                with archive.open("wb") as output:
+                    shutil.copyfileobj(response, output)
+            observed = sha256(archive)
+            if observed != LEANTAR_SHA256:
+                raise SystemExit(
+                    f"leantar archive SHA-256 mismatch: {observed} != {LEANTAR_SHA256}"
+                )
+            print("leantar archive SHA-256 verified:", observed, flush=True)
+            with tarfile.open(archive, "r:gz") as bundle:
+                member = bundle.getmember(
+                    "leantar-v0.1.20-x86_64-unknown-linux-musl/leantar"
+                )
+                extracted = bundle.extractfile(member)
+                if extracted is None:
+                    raise SystemExit("leantar archive member is not a regular file")
+                leantar.write_bytes(extracted.read())
+            leantar.chmod(0o755)
     if not lake.exists():
         raise SystemExit(f"expected lake at {lake}")
     return lake
@@ -168,6 +204,8 @@ def main() -> None:
         "resolved_lake_packages": packages,
         "lean_archive_url": LINUX_ZIP_URL,
         "lean_archive_sha256": LINUX_ZIP_SHA256,
+        "leantar_archive_url": LEANTAR_URL,
+        "leantar_archive_sha256": LEANTAR_SHA256,
         "logical_cpus_visible": os.cpu_count(),
         "thread_cap": 1,
         "kernel_checked_theorems": len(reports),
