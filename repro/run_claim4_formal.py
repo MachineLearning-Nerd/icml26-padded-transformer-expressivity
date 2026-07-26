@@ -114,31 +114,31 @@ def ensure_lake(env: dict[str, str]) -> Path:
                 if executable.is_file():
                     executable.chmod(executable.stat().st_mode | 0o111)
 
-        if not leantar.exists():
-            archive = temporary_root / "leantar.tar.gz"
-            request = urllib.request.Request(
-                LEANTAR_URL,
-                headers={"User-Agent": "OpenResearch-Reproduction/1.0"},
+        archive = temporary_root / "leantar.tar.gz"
+        request = urllib.request.Request(
+            LEANTAR_URL,
+            headers={"User-Agent": "OpenResearch-Reproduction/1.0"},
+        )
+        print("Downloading pinned leantar release archive", flush=True)
+        with urllib.request.urlopen(request, timeout=120) as response:
+            with archive.open("wb") as output:
+                shutil.copyfileobj(response, output)
+        observed = sha256(archive)
+        if observed != LEANTAR_SHA256:
+            raise SystemExit(
+                f"leantar archive SHA-256 mismatch: {observed} != {LEANTAR_SHA256}"
             )
-            print("Downloading pinned leantar release archive", flush=True)
-            with urllib.request.urlopen(request, timeout=120) as response:
-                with archive.open("wb") as output:
-                    shutil.copyfileobj(response, output)
-            observed = sha256(archive)
-            if observed != LEANTAR_SHA256:
-                raise SystemExit(
-                    f"leantar archive SHA-256 mismatch: {observed} != {LEANTAR_SHA256}"
-                )
-            print("leantar archive SHA-256 verified:", observed, flush=True)
-            with tarfile.open(archive, "r:gz") as bundle:
-                member = bundle.getmember(
-                    "leantar-v0.1.20-x86_64-unknown-linux-musl/leantar"
-                )
-                extracted = bundle.extractfile(member)
-                if extracted is None:
-                    raise SystemExit("leantar archive member is not a regular file")
-                leantar.write_bytes(extracted.read())
-            leantar.chmod(0o755)
+        print("leantar archive SHA-256 verified:", observed, flush=True)
+        with tarfile.open(archive, "r:gz") as bundle:
+            member = bundle.getmember(
+                "leantar-v0.1.20-x86_64-unknown-linux-musl/leantar"
+            )
+            extracted = bundle.extractfile(member)
+            if extracted is None:
+                raise SystemExit("leantar archive member is not a regular file")
+            leantar.write_bytes(extracted.read())
+        leantar.chmod(0o755)
+        run([str(leantar), "--version"], env=env)
     if not lake.exists():
         raise SystemExit(f"expected lake at {lake}")
     return lake
