@@ -52,20 +52,27 @@ def main() -> None:
     if forbidden:
         raise SystemExit(f"forbidden proof escape token(s): {forbidden}")
 
+    toolchain = TOOLCHAIN.read_text(encoding="utf-8").strip()
+    elan = shutil.which("elan")
     lean = shutil.which("lean")
-    if not lean:
+    if elan:
+        lean_command = [elan, "run", toolchain, "lean"]
+    elif lean:
+        lean_command = [lean]
+    else:
         raise SystemExit(
-            "Lean not found. Install the pinned toolchain from formal/lean-toolchain."
+            "Lean/elan not found. Install the pinned toolchain from "
+            "formal/lean-toolchain."
         )
     version = subprocess.run(
-        [lean, "--version"], check=True, capture_output=True, text=True
+        [*lean_command, "--version"], check=True, capture_output=True, text=True
     ).stdout.strip()
-    expected = TOOLCHAIN.read_text(encoding="utf-8").strip().rsplit("v", 1)[-1]
+    expected = toolchain.rsplit("v", 1)[-1]
     if f"version {expected}" not in version:
         raise SystemExit(f"expected Lean {expected}, got: {version}")
 
     completed = subprocess.run(
-        [lean, str(SOURCE.relative_to(ROOT))],
+        [*lean_command, str(SOURCE.relative_to(ROOT))],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -86,7 +93,7 @@ def main() -> None:
     certificate = {
         "verdict": "lean_kernel_verified",
         "lean_version": version,
-        "toolchain": TOOLCHAIN.read_text(encoding="utf-8").strip(),
+        "toolchain": toolchain,
         "official_release_archive": (
             "https://github.com/leanprover/lean4/releases/download/"
             "v4.32.0/lean-4.32.0-darwin_aarch64.tar.zst"

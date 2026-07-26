@@ -9,3 +9,6 @@ vendor/
 wandb/
 .DS_Store
 upstream/
+!.openresearch/
+!.openresearch/**
+.openresearch/agent/

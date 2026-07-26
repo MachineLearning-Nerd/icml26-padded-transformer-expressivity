@@ -1,0 +1,14 @@
+[project]
+name = "padded-transformer-expressivity-reproduction"
+version = "0.1.0"
+description = "Fail-closed reproduction evidence for arXiv:2605.30523"
+requires-python = "==3.12.*"
+dependencies = [
+  "marimo>=0.18.0",
+  "numpy==2.5.1",
+  "pytest==9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["repro"]
+testpaths = ["repro/tests"]
