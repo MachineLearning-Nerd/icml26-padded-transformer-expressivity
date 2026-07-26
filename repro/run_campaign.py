@@ -33,8 +33,8 @@ COMMANDS = (
         "theorem42_obligation_regression",
         (sys.executable, "repro/run_theorem42_obligations.py"),
     ),
-    ("lean_kernel_regression", (sys.executable, "repro/run_lean_formal_check.py")),
     ("claim4_universal_formal", (sys.executable, "repro/run_claim4_formal.py")),
+    ("lean_kernel_regression", (sys.executable, "repro/run_lean_formal_check.py")),
     ("pytest_regression", (sys.executable, "-m", "pytest", "-q")),
 )
 
