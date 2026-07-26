@@ -45,7 +45,9 @@ theorem gridStep_pos (bits : ℕ) : 0 < gridStep bits := by
 
 theorem gridStep_le_one (bits : ℕ) : gridStep bits ≤ 1 := by
   unfold gridStep
-  positivity
+  have hpow : (1 : ℝ) ≤ (2 : ℝ) ^ bits :=
+    one_le_pow₀ (by norm_num)
+  simpa using one_div_le_one_div_of_le (by norm_num : (0 : ℝ) < 1) hpow
 
 theorem four_mul_add_one_le_four_pow :
     ∀ bits : ℕ, 2 ≤ bits → 4 * bits + 1 ≤ 4 ^ bits := by
@@ -72,7 +74,8 @@ theorem four_mul_add_one_le_two_pow_two_mul
 theorem exp_neg_succ_lt_half_grid (bits : ℕ) :
     Real.exp (-(bits + 1 : ℝ)) < gridStep bits / 2 := by
   have hexp : (2 : ℝ) < Real.exp 1 := by
-    simpa using Real.add_one_lt_exp (by norm_num : (1 : ℝ) ≠ 0)
+    convert Real.add_one_lt_exp (by norm_num : (1 : ℝ) ≠ 0) using 1 <;>
+      norm_num
   have hp :
       (2 : ℝ) ^ (bits + 1) < Real.exp (bits + 1 : ℝ) := by
     calc
