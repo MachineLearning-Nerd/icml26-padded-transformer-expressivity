@@ -35,7 +35,7 @@ and every maximal exponential to one. Finset congruence then gives exact
 equality of the hard and rounded-soft numerator, denominator, and quotient,
 including ties. No maximum sequence length is assumed.
 
-## Reproduce
+## Current checker and reproduction command
 
 Pinned command:
 
