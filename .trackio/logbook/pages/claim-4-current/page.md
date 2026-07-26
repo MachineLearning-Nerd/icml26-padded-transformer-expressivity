@@ -85,6 +85,22 @@ from run `96a14223-d5c0-43bd-aa53-00053a068b62`.
 That run used Git
 `d61755f5604e2093f6ff6629bc3996ac1bb27725`.
 
+Independent-checker raw values, repeated inline:
+
+```json
+{
+  "seed": 260530523,
+  "cases": 153,
+  "minimum_decimal_underflow_margin": "4.547473508864641189575195312E-13",
+  "negative_control": {
+    "expected_hard_output": "1.00000000",
+    "loose_temperature_output": "0.50000000",
+    "absolute_difference": "0.50000000",
+    "verdict": "EXPECTED_FAIL"
+  }
+}
+```
+
 ## Independent checker and negative control
 
 The independent checker imports no reproduction implementation. It

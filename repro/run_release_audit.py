@@ -130,6 +130,33 @@ def validate_page(claim: int, text: str, verdict: str) -> None:
             raise AssertionError(f"Claim {claim} page missing visible token: {token}")
     if "huggingface.co/spaces/DineshAI/nBuL6HywFX" not in text:
         raise AssertionError(f"Claim {claim} page has no public raw/code link")
+    if claim == 4:
+        independent = json.loads(
+            (
+                ROOT
+                / ".openresearch"
+                / "artifacts"
+                / "claim4"
+                / "raw"
+                / "claim4_independent_checker.json"
+            ).read_text(encoding="utf-8")
+        )
+        displayed_values = (
+            str(independent["seed"]),
+            str(independent["fixed_point_cross_check"]["cases"]),
+            independent["fixed_point_cross_check"][
+                "minimum_decimal_underflow_margin"
+            ],
+            independent["negative_control"]["expected_hard_output"],
+            independent["negative_control"]["loose_temperature_output"],
+            independent["negative_control"]["absolute_difference"],
+            independent["negative_control"]["verdict"],
+        )
+        for value in displayed_values:
+            if value not in text:
+                raise AssertionError(
+                    f"Claim 4 page does not display raw checker value: {value}"
+                )
 
 
 def scope_classifier(markers: list[str]) -> str:
