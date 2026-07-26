@@ -138,7 +138,16 @@ def ensure_lake(env: dict[str, str]) -> Path:
                 raise SystemExit("leantar archive member is not a regular file")
             leantar.write_bytes(extracted.read())
         leantar.chmod(0o755)
-        run([str(leantar), "--version"], env=env)
+        lean = lake.parent / "lean"
+        lean_prefix = Path(
+            run([str(lean), "--print-prefix"], env=env).stdout.strip()
+        )
+        sysroot_leantar = lean_prefix / "bin" / "leantar"
+        if sysroot_leantar != leantar:
+            sysroot_leantar.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(leantar, sysroot_leantar)
+            sysroot_leantar.chmod(0o755)
+        run([str(sysroot_leantar), "--version"], env=env)
     if not lake.exists():
         raise SystemExit(f"expected lake at {lake}")
     return lake
