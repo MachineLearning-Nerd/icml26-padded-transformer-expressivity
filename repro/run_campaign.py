@@ -27,13 +27,13 @@ THREAD_CAP_VARIABLES = (
     "NUMEXPR_NUM_THREADS",
 )
 COMMANDS = (
+    ("claim4_universal_formal", (sys.executable, "repro/run_claim4_formal.py")),
     ("finite_claim_regressions", (sys.executable, "repro/run_audit.py")),
     ("theorem42_graph_regression", (sys.executable, "repro/run_theorem42.py")),
     (
         "theorem42_obligation_regression",
         (sys.executable, "repro/run_theorem42_obligations.py"),
     ),
-    ("claim4_universal_formal", (sys.executable, "repro/run_claim4_formal.py")),
     ("lean_kernel_regression", (sys.executable, "repro/run_lean_formal_check.py")),
     ("pytest_regression", (sys.executable, "-m", "pytest", "-q")),
 )
