@@ -100,6 +100,9 @@ def ensure_lake(env: dict[str, str]) -> Path:
         print("Lean archive SHA-256 verified:", observed, flush=True)
         with zipfile.ZipFile(archive) as bundle:
             bundle.extractall(cache_root)
+        for executable in (cache_root / "lean-4.32.0-linux" / "bin").iterdir():
+            if executable.is_file():
+                executable.chmod(executable.stat().st_mode | 0o111)
     if not lake.exists():
         raise SystemExit(f"expected lake at {lake}")
     return lake
