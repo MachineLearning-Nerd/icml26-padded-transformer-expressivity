@@ -174,6 +174,9 @@ def main() -> None:
         env[name] = "1"
 
     lake = ensure_lake(env)
+    env["PATH"] = os.pathsep.join(
+        [str(lake.parent), env.get("PATH", "")]
+    )
     version = run([str(lake), "--version"], env=env).stdout.strip()
     if "4.32.0" not in version:
         raise SystemExit(f"expected Lake/Lean 4.32.0, got {version}")
