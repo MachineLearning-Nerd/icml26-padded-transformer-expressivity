@@ -1,0 +1,25 @@
+{
+  "verdict": "lean_kernel_verified",
+  "lean_version": "Lean (version 4.32.0, arm64-apple-darwin24.6.0, commit 8c9756b28d64dab099da31a4c09229a9e6a2ef35, Release)",
+  "toolchain": "leanprover/lean4:v4.32.0",
+  "official_release_archive": "https://github.com/leanprover/lean4/releases/download/v4.32.0/lean-4.32.0-darwin_aarch64.tar.zst",
+  "release_archive_sha256": "4faa4757f7ca5e7d9588a9de779550fa58bdf01498edb966f15029e2ea117e4e",
+  "source": "formal/PaddedTransformer.lean",
+  "source_sha256": "0956eaa3eb46a3985fef330fef15d2244db299dacfd2f941864c7566f754788d",
+  "forbidden_escape_tokens": [],
+  "sorry_ax_dependency": false,
+  "kernel_checked_theorems": 11,
+  "axiom_reports": [
+    "'PaddedTransformer.equivalent_of_inclusions' does not depend on any axioms",
+    "'PaddedTransformer.theorem42_from_source_inclusions' does not depend on any axioms",
+    "'PaddedTransformer.padVec_old_coordinate' depends on axioms: [propext]",
+    "'PaddedTransformer.repaired_pointer_width_is_six' does not depend on any axioms",
+    "'PaddedTransformer.repaired_pointer_width_is_constant' does not depend on any axioms",
+    "'PaddedTransformer.repaired_layer1_routes_exactly_source' does not depend on any axioms",
+    "'PaddedTransformer.repaired_layer2_collects_exactly_destination' does not depend on any axioms",
+    "'PaddedTransformer.exact_focusing_operator_collects_destination' depends on axioms: [propext]",
+    "'PaddedTransformer.printed_route_rejected_when_source_ne_gate' does not depend on any axioms",
+    "'PaddedTransformer.average_threshold_cross_multiply' depends on axioms: [propext, Classical.choice, Quot.sound]",
+    "'PaddedTransformer.all_levels_correct' does not depend on any axioms"
+  ]
+}

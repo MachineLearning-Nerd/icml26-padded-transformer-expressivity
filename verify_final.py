@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -47,6 +48,7 @@ def main() -> None:
         "CITATION.cff",
         "outputs/summary.json",
         "outputs/audit_stdout.json",
+        "outputs/lean_formal_certificate.json",
         "formal/Claim4Exact.lean",
         "formal/lean-toolchain",
         ".openresearch/artifacts/claim1/routes.json",
@@ -87,8 +89,9 @@ def main() -> None:
     require(summary["claim_4_log_precision_SMAT_simulates_AHAT"]["max_post_round_difference"] == 0, "Claim 4 finite mismatch")
     require(summary["claim_5_theory_only_scope"]["empirical_benchmark_or_training_protocol"] is False, "theory-only scope changed")
 
-    routes = [load(f".openresearch/artifacts/claim{claim}/routes.json") for claim in (1, 2, 3, 4)]
-    require(all(route["final_verdict"] == "BLOCKED" for route in routes), "Claims 1-4 must remain blocked")
+    routes = [load(f".openresearch/artifacts/claim{claim}/routes.json") for claim in (1, 2, 3)]
+    require(all(route["final_verdict"] == "BLOCKED" for route in routes), "Claims 1-3 must remain blocked")
+    require(load(".openresearch/artifacts/claim4/claim_contract.json")["final_verdict"] == "BLOCKED", "Claim 4 verdict changed")
     require(load(".openresearch/artifacts/claim5/claim_contract.json")["final_verdict"] == "VERIFIED", "Claim 5 scope verdict changed")
 
     formal = load(".openresearch/artifacts/claim4/raw/formal_certificate_run_96a14223.json")
@@ -99,6 +102,14 @@ def main() -> None:
     require(independent["resource_certificate"]["row_count"] == 63, "resource certificate changed")
     require(independent["fixed_point_cross_check"]["cases"] == 153, "finite Claim 4 case count changed")
     require(independent["negative_control"]["absolute_difference"] == "0.50000000", "negative control changed")
+    universal = load("outputs/lean_formal_certificate.json")
+    source_hash = hashlib.sha256((ROOT / "formal/PaddedTransformer.lean").read_bytes()).hexdigest()
+    require(universal["verdict"] == "lean_kernel_verified", "universal Lean certificate not verified")
+    require(universal["source_sha256"] == source_hash, "universal Lean source hash mismatch")
+    require(universal["forbidden_escape_tokens"] == [], "forbidden Lean escape token present")
+    require(universal["kernel_checked_theorems"] == 11, "universal Lean theorem count changed")
+    require(len(universal["axiom_reports"]) == 11, "universal Lean axiom report count changed")
+    require(universal["sorry_ax_dependency"] is False, "universal Lean certificate has sorryAx")
 
     remotes = set(git("for-each-ref", "--format=%(refname:short)", "refs/remotes/origin").splitlines())
     require(remotes == EXPECTED_BRANCHES | {"origin/HEAD"}, f"unexpected remote branches: {sorted(remotes)}")
