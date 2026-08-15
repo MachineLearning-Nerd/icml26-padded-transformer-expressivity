@@ -91,7 +91,7 @@ def main() -> None:
 
     routes = [load(f".openresearch/artifacts/claim{claim}/routes.json") for claim in (1, 2, 3)]
     require(all(route["final_verdict"] == "BLOCKED" for route in routes), "Claims 1-3 must remain blocked")
-    require(load(".openresearch/artifacts/claim4/claim_contract.json")["final_verdict"] == "BLOCKED", "Claim 4 verdict changed")
+    require(load(".openresearch/artifacts/claim4/claim_contract.json")["full_claim_verdict"] == "BLOCKED", "Claim 4 verdict changed")
     require(load(".openresearch/artifacts/claim5/claim_contract.json")["final_verdict"] == "VERIFIED", "Claim 5 scope verdict changed")
 
     formal = load(".openresearch/artifacts/claim4/raw/formal_certificate_run_96a14223.json")
@@ -111,8 +111,9 @@ def main() -> None:
     require(len(universal["axiom_reports"]) == 11, "universal Lean axiom report count changed")
     require(universal["sorry_ax_dependency"] is False, "universal Lean certificate has sorryAx")
 
-    remotes = set(git("for-each-ref", "--format=%(refname:short)", "refs/remotes/origin").splitlines())
-    require(remotes == EXPECTED_BRANCHES | {"origin/HEAD"}, f"unexpected remote branches: {sorted(remotes)}")
+    remote_refs = set(git("for-each-ref", "--format=%(refname)", "refs/remotes/origin/").splitlines())
+    remotes = {ref.removeprefix("refs/remotes/") for ref in remote_refs if not ref.endswith("/HEAD")}
+    require(remotes == EXPECTED_BRANCHES, f"unexpected remote branches: {sorted(remotes)}")
     require(not any(name.startswith("origin/orx/") for name in remotes), "legacy orx branch remains")
     identities = {
         f"{author} <{email}> | {committer} <{commit_email}>"
