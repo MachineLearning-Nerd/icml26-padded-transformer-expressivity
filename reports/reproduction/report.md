@@ -93,10 +93,10 @@ forecast is also 6/10. Only the live evaluator can change it.
 
 The winning evidence lineage is:
 
-- [Claim 4 universal kernel branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claim-4-exact-softmax-underflow-certificate)
-- [Claim 4 package branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claim-4-independent-checker-and-evaluator-packag)
-- [Claims 1–3 route-audit branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/claims-1-3-proof-obligation-and-falsification-au)
-- [Cumulative release-candidate branch](https://github.com/MachineLearning-Nerd/icml26-repro-nBuL6HywFX-padded-transformer-expressivity/tree/orx/cumulative-release-candidate-and-evaluator-audit)
+- [Claim 4 universal kernel branch](https://github.com/MachineLearning-Nerd/icml26-padded-transformer-expressivity/tree/evidence/claim-4-softmax-focusing)
+- [Claim 4 package branch](https://github.com/MachineLearning-Nerd/icml26-padded-transformer-expressivity/tree/audit/claim-4-independent-checker)
+- [Claims 1–3 route-audit branch](https://github.com/MachineLearning-Nerd/icml26-padded-transformer-expressivity/tree/audit/claims-1-3-proof-obligations)
+- [Cumulative release-candidate branch](https://github.com/MachineLearning-Nerd/icml26-padded-transformer-expressivity/tree/release/cumulative-audit)
 
 A full 10/10-grade reproduction would still need semantic proof certificates
 for the AC0/TC0 and FO-uniform equalities, plus the complete mixed-precision

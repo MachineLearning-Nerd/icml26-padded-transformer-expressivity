@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If this audit or its evidence ledger is useful, please cite the software record and the paper."
+title: "ICML 2026 audit — Padded Transformer Expressivity"
+type: software
+version: "2026.08.15"
+date-released: "2026-08-15"
+authors:
+  - name: MachineLearning-Nerd
+repository-code: "https://github.com/MachineLearning-Nerd/icml26-padded-transformer-expressivity"
+url: "https://github.com/MachineLearning-Nerd/icml26-padded-transformer-expressivity"
+keywords:
+  - ICML 2026
+  - padded transformers
+  - transformer expressivity
+  - circuit complexity
+  - reproduction audit
+references:
+  - type: conference-paper
+    authors:
+      - family-names: Svete
+        given-names: Anej
+      - family-names: Merrill
+        given-names: William
+      - family-names: Cotterell
+        given-names: Ryan
+      - family-names: Sabharwal
+        given-names: Ashish
+    title: "Revisiting Padded Transformer Expressivity: Which Architectural Choices Matter and Which Don't"
+    collection-title: "International Conference on Machine Learning"
+    year: 2026
+    eprint: "2605.30523"
+    url: "https://arxiv.org/abs/2605.30523"
